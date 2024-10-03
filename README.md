@@ -18,7 +18,7 @@
 1. git clone the repository
 
 ```shell
-git clone https://github.com/simontran7/dragon
+git clone https://github.com/simontran7/dragon.git
 ```
 
 2. `cd` into the `dragon/` directory, then build the project with `zig`
