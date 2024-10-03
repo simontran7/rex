@@ -1,0 +1,24 @@
+name: ci
+
+on:
+  push:
+    paths-ignore:
+      - 'README.md'
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Zig
+        uses: mlugg/setup-zig@v1
+      - name: Format
+        uses: zig fmt
+      - name: Build
+        uses: zig build
+      - name: Test
+        run: zig build test --summary all
+      - name: Benchmark
+        run: zig build bench
