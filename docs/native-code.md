@@ -2,13 +2,24 @@
 
 ## built-in functions
 
-`print()`
+| Category              | Function           |
+| --------------------- | ------------------ |
+| Input/Output          | print()            |
+| Input/Output          | println()          |
+| Input/Output          | input()            |
+| Type Conversion       | int()              |
+| Type Conversion       | float()            |
+| Type Conversion       | string()           |
+| File Handling         | open()             |
+| File Handling         | close()            |
+| File Handling         | read()             |
+| File Handling         | write()            |
 
 ## standard library
 
 ### collections
 
-abstract data types are implemented with the most common operations.
+Abstract data types are implemented with the most common operations. These are considered Access, insertion, deletion, and sometimes, updates.
 
 - `list`: a list backed by a dynamic array
 - `stack`: a stack backed by a dynamic array
@@ -21,4 +32,4 @@ abstract data types are implemented with the most common operations.
 
 ### concurrency
 
-concurrency is a first class citizen. You have the option to use traditional concurrency with OS level threads, or CSP style concurrency, although the latter is the recommended option.
+Concurrency is a first class citizen. You have the option to use traditional concurrency with OS level threads, or CSP style concurrency, although the latter is the recommended option.
