@@ -2,18 +2,18 @@
 
 ## built-in functions
 
-| Category              | Function           |
-| --------------------- | ------------------ |
-| Input/Output          | print()            |
-| Input/Output          | println()          |
-| Input/Output          | input()            |
-| Type Conversion       | int()              |
-| Type Conversion       | float()            |
-| Type Conversion       | string()           |
-| File Handling         | open()             |
-| File Handling         | close()            |
-| File Handling         | read()             |
-| File Handling         | write()            |
+| Category              | Function            |
+|-----------------------|---------------------|
+| Input/Output          | `print()`           |
+| Input/Output          | `println()`         |
+| Input/Output          | `input()`           |
+| Type Conversion       | `int()`             |
+| Type Conversion       | `float()`           |
+| Type Conversion       | `string()`          |
+| File Handling         | `open()`            |
+| File Handling         | `close()`           |
+| File Handling         | `read()`            |
+| File Handling         | `write()`           |
 
 ## standard library
 
