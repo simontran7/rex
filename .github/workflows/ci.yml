@@ -12,13 +12,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup Zig
-        uses: mlugg/setup-zig@v1
       - name: Format
-        uses: zig fmt
+        uses: make fmt
       - name: Build
-        uses: zig build
+        uses: make
       - name: Test
-        run: zig build test --summary all
+        run: make test
       - name: Benchmark
-        run: zig build bench
+        run: make bench

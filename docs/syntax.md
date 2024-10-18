@@ -18,7 +18,7 @@
 > identifier's first character can only begin with a letter, but subsequent characters may be a letter, digit, or an underscore
 
 > [!TIP]
-> use the upcoming `rockster fmt` for automatic formatting
+> use the upcoming `dragon fmt` for automatic formatting
 
 ## comments
 
@@ -51,7 +51,7 @@ comment *)
 ### variables and constants
 
 ```
-let <variable name>: <type> = ...;
+var <variable name>: <type> = ...;
 ```
 
 ```
@@ -165,7 +165,7 @@ match <variable or constant> {
 ### function
 
 ```
-fn <function name>(<parameter type>: <parameter name>) -> <function return type> {
+func <function name>(<parameter type>: <parameter name>) -> <function return type> {
     ...
     return ...;
 }
@@ -200,12 +200,12 @@ struct <struct name> {
     field <field name>: <type>;
     <var or const> <container name>: <type>;
 
-    fn new(<parameter name>: <parameter type>) -> <struct name> {
+    func new(<parameter name>: <parameter type>) -> <struct name> {
         this.<field name> = <parameter name>;
         ...
     }
 
-    fn <method name>(<parameter name>: <parameter type>) -> <return type> {
+    func <method name>(<parameter name>: <parameter type>) -> <return type> {
         ...
     }
 }
@@ -214,11 +214,10 @@ struct <struct name> {
 > [!NOTE]
 > if you want a struct to follow an interface, the struct declaration should be `struct <struct name> implements <interface name>`
 
-
 ## generics
 
 ```
-fn <function name>[T](<parameter name>: T) -> T {
+func <function name>[T](<parameter name>: T) -> T {
     <var or const> <container name>: T = ...;
 }
 ```

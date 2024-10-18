@@ -11,7 +11,8 @@
 
 ### requirements
 
-[Zig Compiler](https://ziglang.org/)  
+[C Compiler](https://gcc.gnu.org/)  
+[GNU Make](https://www.gnu.org/software/make/)
 
 ### steps
 
@@ -21,11 +22,11 @@
 git clone https://github.com/simontran7/dragon.git
 ```
 
-2. `cd` into the `dragon/` directory, then build the project with `zig`
+2. `cd` into the `dragon/` directory, then build the project with `make`
 
 ```shell
 cd dragon/
-zig build
+make
 ```
 
 4. add the `dragon` executable to your `PATH` by adding the following line to your `.bashrc` file

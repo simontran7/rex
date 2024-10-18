@@ -1,0 +1,107 @@
+#ifndef TOKEN_H
+#define TOKEN_H
+
+typedef struct Token {
+    TokenType token_type;
+    char *value;
+} Token;
+
+typedef enum {
+    IDENTIFIER,
+
+    INTEGER_LITERAL,
+    FLOAT_LITERAL,
+    CHAR_LITERAL,
+    STRING_LITERAL,
+    MULTILINE_STRING_LITERAL,
+
+    LEFT_CIRCLE_BRACK,
+    RIGHT_CIRCLE_BRACK,
+    LEFT_CURLY_BRACK,
+    RIGHT_CURLY_BRACK,
+    LEFT_SQUARE_BRACK,
+    RIGHT_SQUARE_BRACK,
+    COLON,
+    SEMICOLON,
+    DOT,
+    COMMA,
+
+    EQUAL,
+    BANG,
+    PLUS,
+    MINUS,
+    ASTERISK,
+    AMPERSAND,
+    SLASH,
+    PERCENT,
+    AMPERSAND_EQUAL,
+    TILDE,
+    PIPE,
+    PIPE_EQUAL,
+    PLUS_EQUAL,
+    MINUS_EQUAL,
+    CARET_EQUAL,
+    CARET,
+    ASTERISK_EQUAL,
+    SLASH_EQUAL,
+    PERCENT_EQUAL,
+    EQUAL_EQUAL,
+    BANG_EQUAL,
+    RIGHT_ANGLE_BRACKET,
+    RIGHT_ANGLE_BRACKET_RIGHT_ANGLE_BRACKET_EQUAL,
+    RIGHT_ANGLE_BRACKET_RIGHT_ANGLE_BRACKET,
+    RIGHT_ANGLE_BRACKET_EQUAL,
+    LEFT_ANGLE_BRACKET,
+    LEFT_ANGLE_BRACKET_LEFT_ANGLE_BRACKET,
+    LEFT_ANGLE_BRACKET_LEFT_ANGLE_BRACKET_EQUAL,
+    LEFT_ANGLE_BRACKET_EQUAL,
+
+    SKINNY_ARROW,
+    FAT_ARROW,
+    ELLIPSIS,
+    ELLIPSIS_EQUAL,
+
+    ARRAY,
+    AND,
+    BOOL,
+    BREAK,
+    CHAR,
+    CONST,
+    CONTINUE,
+    ELSE,
+    ENUM,
+    FALSE,
+    FIELD,
+    FLOAT,
+    FUNC,
+    FOR,
+    IF,
+    IMPLEMENTS,
+    IMPORT,
+    IN,
+    INT,
+    INTERFACE,
+    MATCH,
+    NIL,
+    NOT,
+    OR,
+    PACKAGE,
+    PUB,
+    RETURN,
+    STRING,
+    STRUCT,
+    THIS,
+    TRUE,
+    TUPLE,
+    VAR,
+    VOID,
+    WHILE,
+    STEP,
+
+    END_OF_FILE,
+    ILLEGAL,
+} TokenType;
+
+TokenType getToken(const char *keyword);
+
+#endif // TOKEN_H

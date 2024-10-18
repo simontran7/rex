@@ -2,6 +2,10 @@
 
 ## to do
 
+- https://beej.us/guide/bgc/html/split/
+- slice in C
+- perfect minimal hash table map
+- implement regular string
 - implement multi string
 - implement '\'' char
 - check utf-8 before compilation
