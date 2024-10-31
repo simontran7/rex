@@ -1,5 +1,5 @@
 <div align="center">
-  <img width="200px" src="docs/rex.png">
+  <img width="200px" src="doc/rex.png">
   <h1>rex</h1>
   <p>simple, statically typed, compiled, and garbage collected programming language</p>
 </div>
