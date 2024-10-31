@@ -37,7 +37,7 @@ export PATH=$PATH:<path to the rex executable>
 
 ## Usage
 
-Refer to the documentation in `doc/` for Dragon's syntax, standard library, benchmarks, or the compiler's design.
+Refer to the documentation in `doc/` for Rex's syntax, standard library, benchmarks, or the compiler's design.
 
 ## Acknowledgements
 
