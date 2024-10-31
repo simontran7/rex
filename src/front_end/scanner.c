@@ -3,20 +3,44 @@
 #include <string.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <errno.h>
 
 #include "token.h"
 
 const char *BOM = "\xEF\xBB\xBF";
 const uint8_t ASCII_NULL = 0;
 
-typedef struct {
+typedef struct Scanner {
     const char *source;
     size_t current_index;
     size_t read_index;
     char current_char;
 } Scanner;
 
-void read(Scanner* scanner)
+char *slice_of(const char *array, size_t start, size_t exclusive_end)
+{
+    if (exclusive_end <= start) {
+        return NULL;
+    }
+
+    size_t slice_length = exclusive_end - start;
+
+    char *slice = (char *) malloc(sizeof(char) * (slice_length + 1));
+    if (slice == NULL) {
+        perror("Malloc system call error");
+        return NULL; 
+    }
+
+    for (size_t i = 0; i < slice_length; i += 1) {
+        slice[i] = array[start + i];
+    }
+    slice[slice_length] = '\0';
+
+    return slice;
+}
+
+
+void read(Scanner *scanner)
 {
     if (scanner->read_index >= strlen(scanner->source)) {
         scanner->current_char = ASCII_NULL;
@@ -27,7 +51,7 @@ void read(Scanner* scanner)
     scanner->read_index += 1;
 }
 
-char peek(Scanner* scanner) 
+char peek(Scanner *scanner) 
 {
     if (scanner->read_index >= strlen(scanner->source)) {
         return ASCII_NULL;
@@ -57,7 +81,7 @@ void skip_multi_line_comment(Scanner *scanner)
     // – indicating a compile error
     read(scanner);
     read(scanner);
-    while (!(scanner->current_char == '*' && peek(scanner) == ')')) {
+    while (!(scanner->current_char == '*' && peek(scanner) == '/')) {
         read(scanner);
     }
     read(scanner);
@@ -70,10 +94,9 @@ char *read_identifier(Scanner *scanner)
     while (isalpha(peek(scanner)) || isdigit(peek(scanner)) || peek(scanner) == '_') {
         read(scanner);
     }
-    return scanner->source[initial_index..scanner->current_index + 1];
+    return slice_of(scanner->source, initial_index, scanner->current_index + 1);
 }
 
-/// reads the supposed float
 char *read_float(Scanner *scanner)
 {
     const initial_index = scanner->current_index;
@@ -91,7 +114,7 @@ char *read_float(Scanner *scanner)
         read(scanner);
     }
 
-    return scanner->source[initial_index .. scanner->current_index + 1];
+    return slice_of(scanner->source, initial_index, scanner->current_index + 1);
 }
 
 char *read_integer(Scanner *scanner)
@@ -100,7 +123,7 @@ char *read_integer(Scanner *scanner)
     while (isdigit(peek(scanner))) {
         read(scanner);
     }
-    return scanner->source[initial_index .. this.current_index + 1];
+    return slice_of(scanner->source, initial_index, scanner->current_index + 1);
 }
 
 char *read_string(Scanner *scanner)
@@ -117,7 +140,7 @@ char *read_string(Scanner *scanner)
         }
         read(scanner);
     }
-    return scanner->source[initial_lexeme_index..this.current_index];
+    return slice_of(scanner->source, initial_lexeme_index, scanner->current_index);
 }
 
 // TODO: fix so value does not contain the \ in Token determines if character forms an escape sequence
@@ -150,13 +173,8 @@ Token scanner_next(Scanner *scanner)
     Token token;
     switch (scanner->current_char) {
         case '(':
-            if (peek(scanner) == '*') {
-                skip_multi_line_comment(scanner);
-                return scanner_next(scanner);
-            } else {
-                token.token_type = LEFT_CIRCLE_BRACK;
-                token.value = NULL;
-            }
+            token.token_type = LEFT_CIRCLE_BRACK;
+            token.value = NULL;
             break;
         case ')':
             token.token_type = RIGHT_CIRCLE_BRACK;
@@ -293,6 +311,9 @@ Token scanner_next(Scanner *scanner)
             } else if (peek(scanner) == '/') {
                 skip_line_comment(scanner);
                 return next(scanner);
+            } else if (peek(scanner) == '*') {
+                skip_multi_line_comment(scanner);
+                return scanner_next(scanner);
             } else {
                 token.token_type = SLASH;
             }

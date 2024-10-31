@@ -8,7 +8,10 @@ typedef enum {
     SUCCESS = 0,
     INVALID_COMMAND = -1,
     INVALID_FILE_EXTENSION = -2,
-    INCORRECT_USAGE = -3
+    INCORRECT_USAGE = -3,
+    FILE_OPEN_ERROR = -4,
+    MEMORY_ALLOCATION_ERROR = -5,
+    FILE_READ_ERROR = -6
 } CLIError;
 
 void help(void);
@@ -40,8 +43,8 @@ int main(int argc, char *argv[])
             return INVALID_COMMAND;
         }
 
-        size_t file_path_len = strlen(file_path);
-        if (file_path_len < 4 || strcmp(file_path + file_path_len - 4, ".dgn") != 0) {
+        uint64_t file_path_length = strlen(file_path);
+        if (file_path_length < 4 || strcmp(file_path + file_path_length - 4, ".rex") != 0) {
             fputs("CLI Error: Invalid File Extension\n", stderr);
             return INVALID_FILE_EXTENSION;
         }
@@ -62,12 +65,12 @@ int main(int argc, char *argv[])
 void help(void) 
 {
     const char *message =
-        "Dragon compiler\n"
+        "Rex compiler\n"
         "\n"
-        "    Usage: dragon [COMMAND] [ARGUMENT]\n"
+        "    Usage: rex [COMMAND] [ARGUMENT]\n"
         "\n"
         "    Commands:\n"
-        "        build [file].dgn        Compile the current package\n"
+        "        build [file].rex        Compile the current package\n"
         "        help                    Display possible commands\n"
         "        version                 Display compiler version";
     puts(message);
@@ -84,21 +87,32 @@ CLIError compile(const char *file_path)
     FILE *file = fopen(file_path, "r");
     if (file == NULL) {
         perror("Error opening file");
-        return errno;
+        return FILE_OPEN_ERROR;
     }
 
     fseek(file, 0, SEEK_END);
-    uint32_t file_size = ftell(file);
+    int64_t file_size = ftell(file);
+    if (file_size == -1L) {
+        perror("Error determining file size");
+        fclose(file);
+        return FILE_READ_ERROR;
+    }
     rewind(file);
 
     char *file_content = (char *) calloc(file_size + 1, sizeof(char));
     if (file_content == NULL) {
         perror("Calloc system call error");
         fclose(file);
-        return errno;
+        return MEMORY_ALLOCATION_ERROR;
     }
 
-    fread(file_content, 1, file_size, file);
+    uint64_t read_size = fread(file_content, 1, file_size, file);
+    if (read_size != (uint64_t) file_size) {
+        perror("Error reading file");
+        free(file_content);
+        fclose(file);
+        return FILE_READ_ERROR;
+    }
     file_content[file_size] = '\0';
 
     printf("Compiling file: %s\n", file_path);

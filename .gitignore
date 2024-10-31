@@ -1,5 +1,5 @@
 .DS_Store
-interpreter-book.pdf
+docs/interpreter-book.pdf
 test.dgn
-test.c
 .vscode/
+test.c

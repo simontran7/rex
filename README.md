@@ -1,44 +1,44 @@
 <div align="center">
-  <img width="200px" src="logo.png">
-  <h1>dragon</h1>
+  <img width="200px" src="docs/rex.png">
+  <h1>rex</h1>
   <p>simple, statically typed, compiled, and garbage collected programming language</p>
 </div>
 
 > [!WARNING]
 > This language is experimental
 
-## installation (building from source)
+## Installation (building from source)
 
-### requirements
+### Requirements
 
-[C Compiler](https://gcc.gnu.org/)  
+[Clang C Compiler](https://clang.llvm.org/)  
 [GNU Make](https://www.gnu.org/software/make/)
 
-### steps
+### Steps
 
 1. git clone the repository
 
 ```shell
-git clone https://github.com/simontran7/dragon.git
+git clone https://github.com/simontran7/rex.git
 ```
 
-2. `cd` into the `dragon/` directory, then build the project with `make`
+2. `cd` into the `rex/` directory, then build the project with `make`
 
 ```shell
-cd dragon/
+cd rex/
 make
 ```
 
-4. add the `dragon` executable to your `PATH` by adding the following line to your `.bashrc` file
+4. add the `rex` executable to your `PATH` by adding the following line to your `.bashrc` file
 
 ```shell
-export PATH=$PATH:<path to the dragon executable>
+export PATH=$PATH:<path to the rex executable>
 ```
 
-## usage
+## Usage
 
-Refer to the documentation in `docs/` for Dragon's syntax, standard library, benchmarks, or the compiler's design.
+Refer to the documentation in `doc/` for Dragon's syntax, standard library, benchmarks, or the compiler's design.
 
-## acknowledgements
+## Acknowledgements
 
 Many thanks to the creators of the resources that I used

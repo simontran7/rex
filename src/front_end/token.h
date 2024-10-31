@@ -1,21 +1,8 @@
-#include "token.h"
 #include <string.h>
 #include <stdint.h>
 
-typedef struct {
-    const char *keyword;
-    TokenType token_type;
-} Entry;
-
-uint32_t hash(const char *str) 
-{
-    uint32_t hash = 0;
-    while (*str) {
-        hash = hash * 31 + *str;
-        str += 1;
-    }
-    return hash % 37;  // Use modulo of 37, the number of keywords
-}
+#ifndef TOKEN_H
+#define TOKEN_H
 
 static Entry keyword_map[37] = {
     [3] = { keyword: "array", token_type: ARRAY },   
@@ -39,7 +26,7 @@ static Entry keyword_map[37] = {
     [22] = { keyword: "int", token_type: INT },
     [29] = { keyword: "interface", token_type: INTERFACE },
     [30] = { keyword: "match", token_type: MATCH },
-    [4] = { keyword: "nil", token_type: NIL },
+    [4] = { keyword: "None", token_type: NONE },
     [15] = { keyword: "not", token_type: NOT },
     [24] = { keyword: "or", token_type: OR },
     [17] = { keyword: "package", token_type: PACKAGE },
@@ -56,14 +43,113 @@ static Entry keyword_map[37] = {
     [34] = { keyword: "step", token_type: STEP }
 };
 
-
 TokenType lookup_keyword(const char *keyword) 
 {
-    size_t index = hash(keyword);
-    if (keyword_map[index].keyword && strcmp(keyword_map[index].keyword, keyword) == 0) {
-        return keyword_map[index].token;
-    }
-    return NULL;
 }
 
+uint32_t hash(const char *str) 
+{
+}
 
+typedef struct Entry {
+    const char *keyword;
+    TokenType token_type;
+} Entry;
+
+typedef enum TokenType {
+    IDENTIFIER,
+
+    INTEGER_LITERAL,
+    FLOAT_LITERAL,
+    CHAR_LITERAL,
+    STRING_LITERAL,
+    MULTILINE_STRING_LITERAL,
+
+    LEFT_CIRCLE_BRACK,
+    RIGHT_CIRCLE_BRACK,
+    LEFT_CURLY_BRACK,
+    RIGHT_CURLY_BRACK,
+    LEFT_SQUARE_BRACK,
+    RIGHT_SQUARE_BRACK,
+    COLON,
+    SEMICOLON,
+    DOT,
+    COMMA,
+
+    EQUAL,
+    BANG,
+    PLUS,
+    MINUS,
+    ASTERISK,
+    AMPERSAND,
+    SLASH,
+    PERCENT,
+    AMPERSAND_EQUAL,
+    TILDE,
+    PIPE,
+    PIPE_EQUAL,
+    PLUS_EQUAL,
+    MINUS_EQUAL,
+    CARET_EQUAL,
+    CARET,
+    ASTERISK_EQUAL,
+    SLASH_EQUAL,
+    PERCENT_EQUAL,
+    EQUAL_EQUAL,
+    BANG_EQUAL,
+    RIGHT_ANGLE_BRACKET,
+    RIGHT_ANGLE_BRACKET_RIGHT_ANGLE_BRACKET_EQUAL,
+    RIGHT_ANGLE_BRACKET_RIGHT_ANGLE_BRACKET,
+    RIGHT_ANGLE_BRACKET_EQUAL,
+    LEFT_ANGLE_BRACKET,
+    LEFT_ANGLE_BRACKET_LEFT_ANGLE_BRACKET,
+    LEFT_ANGLE_BRACKET_LEFT_ANGLE_BRACKET_EQUAL,
+    LEFT_ANGLE_BRACKET_EQUAL,
+
+    SKINNY_ARROW,
+    FAT_ARROW,
+    ELLIPSIS,
+    ELLIPSIS_EQUAL,
+
+    ARRAY,
+    AND,
+    BOOL,
+    BREAK,
+    CHAR,
+    CONST,
+    CONTINUE,
+    ELSE,
+    ENUM,
+    FALSE,
+    FIELD,
+    FLOAT,
+    FUNC,
+    FOR,
+    IF,
+    IMPLEMENTS,
+    IMPORT,
+    IN,
+    INT,
+    INTERFACE,
+    MATCH,
+    NONE,
+    NOT,
+    OR,
+    PACKAGE,
+    PUB,
+    RETURN,
+    STRING,
+    STRUCT,
+    THIS,
+    TRUE,
+    TUPLE,
+    VAR,
+    VOID,
+    WHILE,
+    STEP,
+
+    END_OF_FILE,
+    ILLEGAL,
+} TokenType;
+
+#endif // TOKEN_H

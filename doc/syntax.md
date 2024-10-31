@@ -18,7 +18,7 @@
 > identifier's first character can only begin with a letter, but subsequent characters may be a letter, digit, or an underscore
 
 > [!TIP]
-> use the upcoming `dragon fmt` for automatic formatting
+> use the upcoming `rex fmt` for automatic formatting
 
 ## comments
 
@@ -27,8 +27,8 @@
 ```
 
 ```
-(* multiline 
-comment *)
+/* multiline 
+comment */
 ```
 
 ## values
@@ -46,7 +46,7 @@ comment *)
 | `array[<type>, <length>]`   | compound | pass by reference | an array of specified type and length, enclosed in `[]`                          |
 
 > [!NOTE]
-> no value or reference will be `nil`
+> no value or reference will be `null`
 
 ### variables and constants
 
