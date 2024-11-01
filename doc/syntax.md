@@ -45,7 +45,7 @@ comment */
 | `tuple(<type 1>, <type 2>)` | compound | pass by value     | a tuple containing two values of specified type enclosed in `()`                 |
 | `array[<type>, <length>]`   | compound | pass by reference | an array of specified type and length, enclosed in `[]`                          |
 
-**optional**
+**optional**  
 `annotate <type>?` if the value may be `None`
 
 ### variables and constants
