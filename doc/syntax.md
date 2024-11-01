@@ -41,12 +41,12 @@ comment */
 | `float`                     | atomic   | pass by value     | a 64-bit IEEE 754 floating point number                                          |
 | `bool`                      | atomic   | pass by value     | a 1-bit `true` or `false` boolean value                                          |
 | `char`                      | atomic   | pass by value     | a 32-bit character enclosed in `'`                                               |
-| `tuple(<type 1>, <type 2>)` | compound | pass by value     | a tuple containing two values of specified type enclosed in `()`                 |
 | `string`                    | compound | pass by reference | a null-terminated `char` array denoted using `"` or `"""` for multi-line strings |
+| `tuple(<type 1>, <type 2>)` | compound | pass by value     | a tuple containing two values of specified type enclosed in `()`                 |
 | `array[<type>, <length>]`   | compound | pass by reference | an array of specified type and length, enclosed in `[]`                          |
 
-> [!NOTE]
-> no value or reference will be `null`
+**optional**
+`annotate <type>?` if the value may be `None`
 
 ### variables and constants
 
